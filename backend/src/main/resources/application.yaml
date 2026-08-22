@@ -1,3 +1,39 @@
+server:
+  port: 8080
+
 spring:
   application:
-    name: backend
+    name: Diamond Shield - Lite
+
+  datasource:
+    url: jdbc:postgresql://192.168.1.106:5432/diamond_shield_lite
+    username: rewoly
+    password: Marshmellow89!
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+
+  flyway:
+    enabled: true
+
+  mvc:
+    converters:
+      preferred-json-mapper: gson
+
+  servlet:
+    multipart:
+      max-file-size: 100KB
+      max-request-size: 200KB
+
+app:
+  cors-origin: http://localhost:5173
+  default-admin:
+    username: admin
+    password: admin123
