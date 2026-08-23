@@ -1,4 +1,4 @@
-package ru.server.access.exeption;
+package ru.server.access.exception;
 
 
 public class BadRequestException extends RuntimeException {

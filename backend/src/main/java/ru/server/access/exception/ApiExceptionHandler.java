@@ -1,4 +1,4 @@
-package ru.server.access.exeption;
+package ru.server.access.exception;
 
 import org.springframework.http.*;
 import org.springframework.web.bind.MethodArgumentNotValidException;
