@@ -6,7 +6,7 @@ spring:
     name: Diamond Shield - Lite
 
   datasource:
-    url: jdbc:postgresql://192.168.1.106:5432/diamond_shield_lite
+    url: jdbc:postgresql://192.168.1.102:5432/diamond_shield_lite
     username: rewoly
     password: Marshmellow89!
 
