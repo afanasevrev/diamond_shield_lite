@@ -2,8 +2,12 @@ package ru.server.access.service;
 
 
 import com.google.gson.*;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.event.TransactionPhase;
+import org.springframework.transaction.event.TransactionalEventListener;
 import ru.server.access.dto.LiveDtos.LiveCardEvent;
 import ru.server.access.entity.*;
 import ru.server.access.repository.*;
@@ -63,8 +67,7 @@ public class PercoMessageService {
             return;
         }
 
-        AccessController controller = controllerRepository.findById(controllerId)
-                .orElse(null);
+        AccessController controller = controllerRepository.findById(controllerId).orElse(null);
 
         if (controller == null) {
             return;
@@ -98,9 +101,7 @@ public class PercoMessageService {
         Boolean removeCard = getBoolean(payload, "remove_card");
         String commandSource = getString(payload, "command_source");
 
-        Person person = cardId == null
-                ? null
-                : personRepository.findByCardId(cardId).orElse(null);
+        Person person = cardId == null ? null : personRepository.findByCardId(cardId).orElse(null);
 
         boolean allowed = person != null && person.isActive();
 

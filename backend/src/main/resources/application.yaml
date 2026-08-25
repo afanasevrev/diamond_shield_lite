@@ -26,6 +26,8 @@ spring:
   mvc:
     converters:
       preferred-json-mapper: gson
+    async:
+      request-timeout: -1
 
   servlet:
     multipart:
@@ -37,3 +39,7 @@ app:
   default-admin:
     username: admin
     password: admin123
+
+logging:
+  level:
+    org.springframework.web.context.request.async: ERROR
