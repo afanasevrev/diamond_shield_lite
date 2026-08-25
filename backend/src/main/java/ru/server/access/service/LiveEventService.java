@@ -4,15 +4,13 @@ import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
 public class LiveEventService {
 
-    private final List<SseEmitter> emitters =
-            new CopyOnWriteArrayList<>();
+    private final List<SseEmitter> emitters = new CopyOnWriteArrayList<>();
 
     private final Gson gson;
 
@@ -26,12 +24,22 @@ public class LiveEventService {
         emitters.add(emitter);
 
         emitter.onCompletion(() -> emitters.remove(emitter));
-        emitter.onTimeout(() -> emitters.remove(emitter));
-        emitter.onError(error -> emitters.remove(emitter));
+
+        emitter.onTimeout(() -> {
+            emitters.remove(emitter);
+        });
+
+        emitter.onError(error -> {
+            emitters.remove(emitter);
+        });
 
         try {
-            emitter.send(SseEmitter.event().name("connected").data("{\"connected\":true}"));
-        } catch (IOException exception) {
+            emitter.send(
+                    SseEmitter.event()
+                            .name("connected")
+                            .data("{\"connected\":true}")
+            );
+        } catch (Exception exception) {
             emitters.remove(emitter);
         }
 
@@ -48,8 +56,7 @@ public class LiveEventService {
                                 .name("card")
                                 .data(json)
                 );
-            } catch (IOException exception) {
-                emitter.complete();
+            } catch (Exception exception) {
                 emitters.remove(emitter);
             }
         }
