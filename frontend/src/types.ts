@@ -60,3 +60,10 @@ export interface Reader {
     exdevNumber: number;
     exdevDirection: number;
 }
+
+export interface Admin {
+    id: number;
+    username: string;
+    enabled: boolean;
+    createdAt: string;
+}

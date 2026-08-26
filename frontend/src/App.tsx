@@ -6,8 +6,10 @@ import LivePage from "./components/LivePage";
 import PeoplePage from "./components/PeoplePage";
 import HistoryPage from "./components/HistoryPage";
 import ControllersPage from "./components/ControllersPage";
+import AdminsPage from "./components/AdminsPage";
 
-type Page = "live" | "people" | "history" | "controllers";
+
+type Page = "live" | "people" | "history" | "controllers" | "admins";
 
 export default function App() {
     const [authenticated, setAuthenticated] =
@@ -66,6 +68,10 @@ export default function App() {
                         Контроллеры
                     </button>
 
+                    <button onClick={() => setPage("admins")}>
+                        Администраторы
+                    </button>
+
                     <button
                         className="danger"
                         onClick={() => {
@@ -83,6 +89,7 @@ export default function App() {
                 {page === "people" && <PeoplePage/>}
                 {page === "history" && <HistoryPage/>}
                 {page === "controllers" && <ControllersPage/>}
+                {page === "admins" && <AdminsPage/>}
             </main>
         </div>
     );

@@ -295,3 +295,31 @@ th {
         grid-template-columns: 1fr;
     }
 }
+
+.admin-form {
+    grid-template-columns:
+        repeat(3, minmax(200px, 1fr))
+        auto;
+}
+
+.current-admin {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 3px 8px;
+    color: white;
+    font-size: 12px;
+    border-radius: 12px;
+    background: #2563eb;
+}
+
+@media (max-width: 900px) {
+    .admin-form {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .admin-form {
+        grid-template-columns: 1fr;
+    }
+}
