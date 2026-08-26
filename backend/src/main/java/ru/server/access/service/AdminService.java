@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.server.access.dto.AdminDtos.*;
+import ru.server.access.dto.AdminDtos.AdminResponse;
+import ru.server.access.dto.AdminDtos.CreateAdminRequest;
 import ru.server.access.entity.Admin;
 import ru.server.access.exception.BadRequestException;
+import ru.server.access.exception.NotFoundException;
 import ru.server.access.repository.AdminRepository;
 
 import java.util.List;
@@ -22,8 +24,10 @@ public class AdminService {
     public AdminService(
             AdminRepository adminRepository,
             PasswordEncoder passwordEncoder,
-            @Value("${app.default-admin.username}") String defaultUsername,
-            @Value("${app.default-admin.password}") String defaultPassword
+            @Value("${app.default-admin.username}")
+            String defaultUsername,
+            @Value("${app.default-admin.password}")
+            String defaultPassword
     ) {
         this.adminRepository = adminRepository;
         this.passwordEncoder = passwordEncoder;
@@ -43,23 +47,23 @@ public class AdminService {
         admin.setEnabled(true);
 
         adminRepository.save(admin);
+
+        System.out.println(
+                "Создан администратор по умолчанию: " + defaultUsername
+        );
     }
 
     @Transactional(readOnly = true)
     public List<AdminResponse> findAll() {
-        return adminRepository.findAll().stream()
-                .map(this::map)
-                .toList();
+        return adminRepository.findAll().stream().map(this::map).toList();
     }
 
     @Transactional
     public AdminResponse create(CreateAdminRequest request) {
-        String username = request.username().trim();
+        String username = normalizeUsername(request.username());
 
         if (adminRepository.existsByUsername(username)) {
-            throw new BadRequestException(
-                    "Администратор с таким логином уже существует"
-            );
+            throw new BadRequestException("Администратор с таким логином уже существует");
         }
 
         Admin admin = new Admin();
@@ -70,6 +74,35 @@ public class AdminService {
         admin.setEnabled(true);
 
         return map(adminRepository.save(admin));
+    }
+
+    @Transactional
+    public void delete(
+            Long adminId,
+            String currentUsername
+    ) {
+        Admin admin = adminRepository.findById(adminId).orElseThrow(() -> new NotFoundException("Администратор не найден"));
+
+        if (admin.getUsername().equals(currentUsername)) {
+            throw new BadRequestException(
+                    "Нельзя удалить администратора, под которым выполнен вход"
+            );
+        }
+
+        if (adminRepository.count() <= 1) {
+            throw new BadRequestException(
+                    "Нельзя удалить последнего администратора"
+            );
+        }
+
+        adminRepository.delete(admin);
+    }
+
+    private String normalizeUsername(String username) {
+        if (username == null || username.isBlank()) {
+            throw new BadRequestException("Логин администратора обязателен");
+        }
+        return username.trim();
     }
 
     private AdminResponse map(Admin admin) {

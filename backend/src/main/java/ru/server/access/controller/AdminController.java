@@ -1,9 +1,11 @@
 package ru.server.access.controller;
 
-
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-import ru.server.access.dto.AdminDtos.*;
+import ru.server.access.dto.AdminDtos.AdminResponse;
+import ru.server.access.dto.AdminDtos.CreateAdminRequest;
 import ru.server.access.service.AdminService;
 
 import java.util.List;
@@ -24,9 +26,18 @@ public class AdminController {
     }
 
     @PostMapping
-    public AdminResponse create(
-            @Valid @RequestBody CreateAdminRequest request
-    ) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public AdminResponse create(@Valid @RequestBody CreateAdminRequest request) {
         return adminService.create(request);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id, Authentication authentication
+    ) {
+        adminService.delete(
+                id,
+                authentication.getName()
+        );
     }
 }
