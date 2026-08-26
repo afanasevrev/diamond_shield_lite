@@ -36,7 +36,8 @@ spring:
       max-request-size: 200KB
 
 app:
-  cors-origin: http://*:[*]
+  cors:
+    allowed-origin-pattern: "http://*:[*]"
   default-admin:
     username: admin
     password: admin123

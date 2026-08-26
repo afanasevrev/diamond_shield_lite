@@ -14,7 +14,6 @@ public class DiamondShieldLiteApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DiamondShieldLiteApplication.class, args);
 	}
-
 	@Bean
 	public CommandLineRunner createDefaultAdmin(AdminService adminService) {
 		return args -> adminService.createDefaultAdminIfRequired();
