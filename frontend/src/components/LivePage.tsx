@@ -7,6 +7,8 @@ interface DisplayCard extends LiveCard {
     imageObjectUrl: string | null;
 }
 
+const MAX_VISIBLE_CARDS = 6;
+
 export default function LivePage() {
     const [cards, setCards] = useState<DisplayCard[]>([]);
     const [connected, setConnected] = useState(false);
@@ -32,25 +34,23 @@ export default function LivePage() {
                 imageObjectUrl
             };
 
-            setCards(current => {
-                const next = [displayCard, ...current].slice(0, 30);
+        setCards(current => {
+                const next = [displayCard,...current].slice(0, MAX_VISIBLE_CARDS);
+                const removedCards = current.filter(
+                oldCard => !next.some(
+                    newCard => newCard.key === oldCard.key
+                )
+            );
 
-                const removed = current.filter(
-                    oldCard => !next.some(
-                        nextCard => nextCard.key === oldCard.key
-                    )
-                );
-
-                for (const cardToRemove of removed) {
-                    if (cardToRemove.imageObjectUrl) {
-                        URL.revokeObjectURL(
-                            cardToRemove.imageObjectUrl
-                        );
-                    }
+                for (const removedCard of removedCards) {
+                    if (removedCard.imageObjectUrl) {
+                        URL.revokeObjectURL(removedCard.imageObjectUrl);
                 }
+            }
 
-                return next;
-            });
+            return next;
+        });
+
 
             setConnected(true);
             setError("");
