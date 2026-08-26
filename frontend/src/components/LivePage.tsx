@@ -7,7 +7,7 @@ interface DisplayCard extends LiveCard {
     imageObjectUrl: string | null;
 }
 
-const MAX_VISIBLE_CARDS = 6;
+const MAX_VISIBLE_CARDS = 5;
 
 export default function LivePage() {
     const [cards, setCards] = useState<DisplayCard[]>([]);
