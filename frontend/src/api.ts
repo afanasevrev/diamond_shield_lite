@@ -140,3 +140,72 @@ export async function subscribeToCards(
         }
     }
 }
+
+export async function downloadFile(
+    path: string, fallbackFilename: string)
+    : Promise<void> {
+    const response = await fetch(`${API_URL}${path}`, {
+        method: "GET",
+        headers: {
+            Authorization: authorizationHeader()
+        }
+    });
+
+    if (!response.ok) {
+        let message = `Ошибка HTTP ${response.status}`;
+
+        try {
+            const error = await response.json();
+            message = error.message ?? message;
+        } catch {
+            // Ответ не является JSON.
+        }
+
+        throw new Error(message);
+    }
+
+    const blob = await response.blob();
+    const objectUrl = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = objectUrl;
+    link.download = getFilename(
+        response.headers.get("Content-Disposition"),
+        fallbackFilename
+    );
+
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    window.setTimeout(() => {
+        URL.revokeObjectURL(objectUrl);
+    }, 1000);
+}
+
+function getFilename(
+    contentDisposition: string | null,
+    fallbackFilename: string
+): string {
+    if (!contentDisposition) {
+        return fallbackFilename;
+    }
+
+    const utf8Match = contentDisposition.match(
+        /filename\*=UTF-8''([^;]+)/
+    );
+
+    if (utf8Match?.[1]) {
+        try {
+            return decodeURIComponent(utf8Match[1]);
+        } catch {
+            return fallbackFilename;
+        }
+    }
+
+    const regularMatch = contentDisposition.match(
+        /filename="?([^";]+)"?/
+    );
+
+    return regularMatch?.[1] ?? fallbackFilename;
+}

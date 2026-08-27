@@ -323,3 +323,16 @@ th {
         grid-template-columns: 1fr;
     }
 }
+
+.excel-button {
+    color: white;
+    background: #15803d;
+}
+
+.excel-button:hover {
+    background: #166534;
+}
+
+.excel-button:disabled {
+    background: #86a991;
+}

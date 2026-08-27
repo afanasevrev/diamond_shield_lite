@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {api} from "../api";
+import {api, downloadFile} from "../api";
 import {HistoryItem} from "../types";
 
 const EVENT_NAMES: Record<string, string> = {
@@ -17,9 +17,35 @@ const EVENT_NAMES: Record<string, string> = {
     output: "Изменение выхода"
 };
 
+
 export default function HistoryPage() {
     const [history, setHistory] = useState<HistoryItem[]>([]);
     const [error, setError] = useState("");
+    const [exporting, setExporting] = useState(false);
+
+    async function exportXlsx() {
+    setExporting(true);
+    setError("");
+
+    try {
+        const date = new Date()
+            .toISOString()
+            .substring(0, 10);
+
+        await downloadFile(
+            "/api/history/export.xlsx",
+            `diamond-shield-journal-${date}.xlsx`
+        );
+    } catch (exception) {
+        setError(
+            exception instanceof Error
+                ? exception.message
+                : "Не удалось выгрузить журнал"
+        );
+    } finally {
+        setExporting(false);
+    }
+    }
 
     useEffect(() => {
         async function load() {
@@ -48,7 +74,23 @@ export default function HistoryPage() {
 
     return (
         <section className="panel">
-            <h2>Журнал событий</h2>
+        
+            <div className="panel-title">
+            <div>
+                <h2>Журнал событий</h2>
+                <p>История событий контроллеров</p>
+            </div>
+
+            <button
+            className="excel-button"
+            disabled={exporting}
+            onClick={exportXlsx}
+            >
+            {exporting
+            ? "Формирование XLSX..."
+            : "Выгрузить в XLSX"}
+            </button>
+            </div>
 
             {error && <div className="error">{error}</div>}
 
