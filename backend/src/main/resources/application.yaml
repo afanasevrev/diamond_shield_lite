@@ -1,15 +1,16 @@
 server:
   address: 0.0.0.0
   port: 8080
+  forward-headers-strategy: framework
 
 spring:
   application:
     name: Diamond Shield - Lite
 
   datasource:
-    url: jdbc:postgresql://192.168.1.102:5432/diamond_shield_lite
-    username: rewoly
-    password: Marshmellow89!
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/diamond_shield_lite}
+    username: ${SPRING_DATASOURCE_USERNAME:rewoly}
+    password: ${SPRING_DATASOURCE_PASSWORD:Marshmellow89!}
 
   jpa:
     hibernate:
@@ -27,8 +28,6 @@ spring:
   mvc:
     converters:
       preferred-json-mapper: gson
-    async:
-      request-timeout: -1
 
   servlet:
     multipart:
@@ -37,10 +36,11 @@ spring:
 
 app:
   cors:
-    allowed-origin-pattern: "http://*:[*]"
+    allowed-origin-pattern: ${APP_CORS_ALLOWED_ORIGIN_PATTERN:http://*:[*]}
+
   default-admin:
-    username: admin
-    password: admin123
+    username: ${APP_DEFAULT_ADMIN_USERNAME:admin}
+    password: ${APP_DEFAULT_ADMIN_PASSWORD:admin123}
 
 logging:
   level:
