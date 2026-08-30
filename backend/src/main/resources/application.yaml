@@ -8,9 +8,9 @@ spring:
     name: Diamond Shield - Lite
 
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/diamond_shield_lite}
-    username: ${SPRING_DATASOURCE_USERNAME:rewoly}
-    password: ${SPRING_DATASOURCE_PASSWORD:Marshmellow89!}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/diamond_shield_lite_docker}
+    username: ${SPRING_DATASOURCE_USERNAME:diamond}
+    password: ${SPRING_DATASOURCE_PASSWORD:diamond}
 
   jpa:
     hibernate:
