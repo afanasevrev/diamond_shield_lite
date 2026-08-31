@@ -129,3 +129,28 @@
 ![Экспорт XLSX](docs/screenshots/xlsx-export.PNG)
 
 ---
+
+## Архитектура
+
+mermaid
+flowchart LR
+    Browser[Web-браузер]
+    Frontend[React + Nginx]
+    Backend[Spring Boot]
+    Database[(PostgreSQL)]
+    Controller[PERCo-C01]
+
+    Browser -->|HTTP, port 80| Frontend
+    Frontend -->|REST API| Backend
+    Backend -->|SSE| Frontend
+    Backend -->|JDBC| Database
+    Controller <-->|WebSocket, port 8080| Backend
+
+Приложение состоит из двух Docker-контейнеров:
+
+1. `frontend` — React-приложение, размещённое в Nginx;
+2. `backend` — Spring Boot приложение.
+
+PostgreSQL устанавливается непосредственно в Ubuntu и не запускается в Docker.
+
+---
