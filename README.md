@@ -132,8 +132,7 @@
 
 ## Архитектура
 
-'
-mermaid
+```mermaid
 flowchart LR
     Browser[Web-браузер]
     Frontend[React + Nginx]
@@ -146,7 +145,7 @@ flowchart LR
     Backend -->|SSE| Frontend
     Backend -->|JDBC| Database
     Controller <-->|WebSocket, port 8080| Backend
-'
+```
 
 Приложение состоит из двух Docker-контейнеров:
 
