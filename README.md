@@ -307,3 +307,23 @@ TO diamond;
 ```sql
 \q
 ```
+
+### 4. Настройка PostgreSQL для Docker
+
+В файле `postgresql.conf` установите:
+
+```text
+listen_addresses = '*'
+```
+
+Добавьте в `pg_hba.conf`:
+
+```text
+host   diamond_shield   diamond   172.30.0.0/24   scram-sha-256
+```
+
+Перезапустите PostgreSQL:
+
+```bash
+sudo systemctl restart postgresql
+```
