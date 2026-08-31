@@ -473,3 +473,41 @@ docker compose -f docker-compose.prod.yml start
 ```bash
 docker compose -f docker-compose.prod.yml down
 ```
+
+PostgreSQL и его данные при этом не удаляются.
+
+---
+
+## Подключение контроллера PERCo
+
+Для входящего подключения контроллера используется адрес:
+
+```text
+ws://IP_UBUNTU:8080/tcp
+```
+
+Например:
+
+```text
+ws://192.168.1.10:8080/tcp
+```
+
+Перед подключением контроллер необходимо добавить в интерфейсе Diamond Shield - Lite. IP-адрес в системе должен совпадать с реальным IP контроллера.
+
+Если у контроллера установлен пароль, backend автоматически выполняет авторизацию:
+
+```text
+MD5(salt + password)
+```
+
+### Проверка порта с Windows
+
+```powershell
+Test-NetConnection 192.168.1.10 -Port 8080
+```
+
+Ожидаемый результат:
+
+```text
+TcpTestSucceeded: True
+```
