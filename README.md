@@ -119,3 +119,7 @@
 ### Контроллеры и считыватели
 
 ![Контроллеры](docs/screenshots/controllers.PNG)
+
+### Администраторы
+
+![Администраторы](docs/screenshots/admins.PNG)
