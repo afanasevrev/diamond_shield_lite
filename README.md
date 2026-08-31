@@ -295,8 +295,10 @@ sudo -u postgres psql
 ```sql
 CREATE USER diamond
 WITH PASSWORD 'CHANGE_ME_DATABASE_PASSWORD';
+
 CREATE DATABASE diamond_shield
 OWNER diamond;
+
 GRANT ALL PRIVILEGES
 ON DATABASE diamond_shield
 TO diamond;
