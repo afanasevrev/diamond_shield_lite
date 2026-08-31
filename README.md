@@ -235,3 +235,39 @@ docker pull rewoly/diamond-shield-lite-frontend:latest
 ```text
 https://hub.docker.com/r/rewoly/diamond-shield-lite-frontend/tags
 ```
+
+---
+
+## Требования
+
+Для запуска необходимы:
+
+- Ubuntu 22.04 или новее;
+- PostgreSQL 14 или новее;
+- Docker Engine;
+- Docker Compose Plugin;
+- открытый порт `80` для сайта;
+- открытый порт `8080` для контроллера PERCo;
+- минимум 2 ГБ оперативной памяти;
+- минимум 5 ГБ свободного дискового пространства.
+
+---
+
+## Быстрый запуск
+
+### 1. Создание `.env`
+
+Создайте файл и введите:
+
+Пример:
+```env
+IMAGE_VERSION=latest
+DOCKERHUB_USERNAME=YOUR_DOCKERHUB_USERNAME
+
+DB_NAME=diamond_shield
+DB_USER=diamond
+DB_PASSWORD=CHANGE_ME_DATABASE_PASSWORD
+
+DEFAULT_ADMIN_USERNAME=admin
+DEFAULT_ADMIN_PASSWORD=CHANGE_ME_ADMIN_PASSWORD
+```
