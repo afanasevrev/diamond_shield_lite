@@ -175,8 +175,6 @@ PostgreSQL устанавливается непосредственно в Ubun
 - PostgreSQL;
 - Maven.
 
-Backend реализован без Lombok.
-
 ### Frontend
 
 - React;
