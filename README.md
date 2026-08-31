@@ -115,3 +115,7 @@
 ### Журнал событий
 
 ![Журнал](docs/screenshots/history.PNG)
+
+### Контроллеры и считыватели
+
+![Контроллеры](docs/screenshots/controllers.PNG)
