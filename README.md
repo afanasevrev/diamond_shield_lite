@@ -327,3 +327,149 @@ host   diamond_shield   diamond   172.30.0.0/24   scram-sha-256
 ```bash
 sudo systemctl restart postgresql
 ```
+
+### 5. Запуск приложения
+
+Скачайте Docker-образы:
+
+```bash
+docker compose -f docker-compose.prod.yml pull
+```
+
+Запустите:
+
+```bash
+docker compose -f docker-compose.prod.yml up -d
+```
+Проверьте:
+
+```bash
+docker compose -f docker-compose.prod.yml ps
+```
+Посмотрите логи backend:
+
+```bash
+docker compose -f docker-compose.prod.yml logs -f backend
+```
+
+### 6. Открытие приложения
+
+Узнайте IP Ubuntu:
+
+```bash
+hostname -I
+```
+
+Откройте в браузере:
+
+```text
+http://IP_UBUNTU
+```
+Например:
+
+```text
+http://192.168.1.10
+```
+
+---
+
+## Настройка PostgreSQL
+
+Backend работает в Docker, а PostgreSQL — непосредственно в Ubuntu.
+
+Поэтому backend подключается к PostgreSQL через:
+
+```text
+host.docker.internal:5432
+```
+
+В `docker-compose.prod.yml` используется:
+
+```yaml
+extra_hosts:
+  • "host.docker.internal:host-gateway"
+```
+
+JDBC-адрес:
+
+```text
+jdbc:postgresql://host.docker.internal:5432/diamond_shield
+```
+
+Использовать `localhost` внутри backend-контейнера нельзя, потому что `localhost` будет указывать на сам контейнер.
+
+### Проверка PostgreSQL
+
+```bash
+sudo systemctl status postgresql
+```
+
+Проверка порта:
+
+```bash
+sudo ss -lntp | grep 5432
+```
+
+Проверка базы:
+
+```bash
+sudo -u postgres psql -d diamond_shield
+sql
+\dt
+```
+
+После первого запуска Flyway должен создать таблицы:
+
+```text
+admins
+persons
+access_controllers
+readers
+passage_events
+flyway_schema_history
+```
+
+---
+
+## Запуск Docker-контейнеров
+
+### Запуск
+
+```bash
+docker compose -f docker-compose.prod.yml up -d
+```
+
+### Состояние
+
+```bash
+docker compose -f docker-compose.prod.yml ps
+```
+
+### Логи backend
+
+```bash
+docker compose -f docker-compose.prod.yml logs -f backend
+```
+### Логи frontend
+
+```bash
+docker compose -f docker-compose.prod.yml logs -f frontend
+```
+
+### Остановка
+
+```bash
+docker compose -f docker-compose.prod.yml stop
+```
+
+### Повторный запуск
+
+```bash
+docker compose -f docker-compose.prod.yml start
+```
+
+### Удаление контейнеров
+
+```bash
+docker compose -f docker-compose.prod.yml down
+```
