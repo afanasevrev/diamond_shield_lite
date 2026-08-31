@@ -216,5 +216,5 @@ Backend реализован без Lombok.
 
 [![Docker Hub Backend](https://img.shields.io/badge/Docker_Hub-backend-blue?logo=docker)](https://hub.docker.com/repository/docker/rewoly/diamond-shield-lite-backend/general)
 
-bash
+```bash
 docker pull rewoly/diamond-shield-lite-backend:latest
