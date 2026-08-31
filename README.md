@@ -29,9 +29,8 @@
 - [Настройка PostgreSQL](#настройка-postgresql)
 - [Запуск Docker-контейнеров](#запуск-docker-контейнеров)
 - [Подключение контроллера PERCo](#подключение-контроллера-perco)
-- [Сборка из исходного кода](#сборка-из-исходного-кода)
-- [Управление приложением](#управление-приложением)
 - [Резервное копирование](#резервное-копирование)
+- [API](#api)
 - [Безопасность](#безопасность)
 
 ---
@@ -511,3 +510,61 @@ Test-NetConnection 192.168.1.10 -Port 8080
 ```text
 TcpTestSucceeded: True
 ```
+
+---
+
+## Резервное копирование
+
+Создать резервную копию PostgreSQL:
+
+```bash
+sudo -u postgres pg_dump \
+  -Fc \
+  diamond_shield \
+  > ~/diamond_shield_backup.dump
+```
+
+Проверить файл:
+
+```bash
+ls -lh ~/diamond_shield_backup.dump
+```
+
+Восстановить:
+
+```bash
+sudo -u postgres pg_restore \
+  --clean \
+  --if-exists \
+  --dbname=diamond_shield \
+  ~/diamond_shield_backup.dump
+```
+
+Перед обновлением приложения рекомендуется создавать резервную копию.
+
+---
+
+## API
+
+Основные endpoints:
+
+| Метод | Endpoint | Описание |
+|---|---|---|
+| `GET` | `/api/auth/me` | Текущий пользователь |
+| `GET` | `/api/persons` | Список людей |
+| `POST` | `/api/persons` | Добавление человека |
+| `GET` | `/api/persons/{id}/photo` | Фотография |
+| `GET` | `/api/history` | Журнал событий |
+| `GET` | `/api/history/export.xlsx` | Экспорт XLSX |
+| `GET` | `/api/controllers` | Список контроллеров |
+| `POST` | `/api/controllers` | Добавление контроллера |
+| `POST` | `/api/controllers/{id}/connect` | Подключение |
+| `POST` | `/api/controllers/{id}/command` | Отправка JSON-команды |
+| `GET` | `/api/controllers/{id}/readers` | Считыватели |
+| `POST` | `/api/controllers/{id}/readers` | Добавление считывателя |
+| `GET` | `/api/admins` | Администраторы |
+| `POST` | `/api/admins` | Добавление администратора |
+| `DELETE` | `/api/admins/{id}` | Удаление администратора |
+| `GET` | `/api/live/cards` | SSE-фоторяд |
+
+---
