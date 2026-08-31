@@ -6,6 +6,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)
 ![Docker](https://img.shields.io/badge/Docker-Compose-blue)
+![Ubuntu 22.04](https://img.shields.io/badge/Ubuntu-22.04-E95420?logo=ubuntu&logoColor=white)
 ![License](https://img.shields.io/badge/license-not_specified-lightgrey)
 
 **Diamond Shield - Lite** — минимальная клиент-серверная система контроля доступа для работы с контроллером **PERCo-C01** по протоколу WebSocket.
