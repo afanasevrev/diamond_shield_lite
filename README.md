@@ -205,3 +205,14 @@ Backend реализован без Lombok.
     ├── package.json
     └── src/
 ```
+
+---
+
+## Docker-образы
+
+Готовые Docker-образы опубликованы в Docker Hub.
+
+### Backend
+
+[![Docker Hub Backend](https://img.shields.io/badge/Docker_Hub-backend-blue?logo=docker)](https://hub.docker.com/repository/docker/rewoly/diamond-shield-lite-backend/general)
+
