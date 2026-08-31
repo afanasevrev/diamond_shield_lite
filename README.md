@@ -194,6 +194,7 @@ Backend реализован без Lombok.
 ---
 
 ## Структура репозитория
+```
 ├── Dockerfile
 ├── pom.xml
 └── src/
@@ -202,3 +203,4 @@ Backend реализован без Lombok.
 ├── package.json
 └── src/
 └── screenshots/
+```
