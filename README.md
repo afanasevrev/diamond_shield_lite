@@ -255,7 +255,17 @@ https://hub.docker.com/r/rewoly/diamond-shield-lite-frontend/tags
 
 ## Быстрый запуск
 
-### 1. Создание `.env`
+### 1. Клонирование репозитория
+
+```bash
+git clone https://github.com/afanasevrev/diamond_shield_lite.git
+```
+
+```bash
+cd diamond_shield_lite
+```
+
+### 2. Создание `.env`
 
 Создайте файл и введите:
 
