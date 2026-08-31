@@ -271,3 +271,10 @@ DB_PASSWORD=CHANGE_ME_DATABASE_PASSWORD
 DEFAULT_ADMIN_USERNAME=admin
 DEFAULT_ADMIN_PASSWORD=CHANGE_ME_ADMIN_PASSWORD
 ```
+
+Обязательно замените пароли.
+
+Ограничьте доступ к файлу.
+
+### 3. Подготовка PostgreSQL
+
