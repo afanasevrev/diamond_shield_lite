@@ -218,3 +218,7 @@ Backend реализован без Lombok.
 
 ```bash
 docker pull rewoly/diamond-shield-lite-backend:latest
+
+Список версий:
+```text
+https://hub.docker.com/r/rewoly/diamond-shield-lite-backend/tags
