@@ -123,3 +123,9 @@
 ### Администраторы
 
 ![Администраторы](docs/screenshots/admins.PNG)
+
+### Экспорт в XLSX
+
+![Экспорт XLSX](docs/screenshots/xlsx-export.PNG)
+
+---
