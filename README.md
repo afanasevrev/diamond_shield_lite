@@ -100,4 +100,4 @@
 
 ### Авторизация
 
-![Авторизация](docs/screenshots/login.png)
+![Авторизация](docs/screenshots/login.PNG)
