@@ -132,7 +132,6 @@
 
 ## Архитектура
 
-``mermaid
 flowchart LR
     Browser[Web-браузер]
     Frontend[React + Nginx]
