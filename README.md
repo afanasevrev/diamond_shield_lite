@@ -155,3 +155,40 @@ flowchart LR
 PostgreSQL устанавливается непосредственно в Ubuntu и не запускается в Docker.
 
 ---
+
+## Технологии
+
+### Backend
+
+- Java 21;
+- Spring Boot;
+- Spring Web;
+- Spring WebSocket;
+- Spring Security;
+- Spring Data JPA;
+- Hibernate;
+- Gson;
+- Flyway;
+- Apache POI;
+- PostgreSQL;
+- Maven.
+
+Backend реализован без Lombok.
+
+### Frontend
+
+- React;
+- TypeScript;
+- Vite;
+- Server-Sent Events;
+- Nginx.
+
+### Инфраструктура
+
+- Docker;
+- Docker Compose;
+- PostgreSQL;
+- Ubuntu;
+- Docker Hub.
+
+---
