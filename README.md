@@ -223,3 +223,15 @@ docker pull rewoly/diamond-shield-lite-backend:latest
 ```text
 https://hub.docker.com/r/rewoly/diamond-shield-lite-backend/tags
 ```
+
+### Frontend
+
+[![Docker Hub Frontend](https://img.shields.io/badge/Docker_Hub-frontend-blue?logo=docker)](https://hub.docker.com/repository/docker/rewoly/diamond-shield-lite-frontend/general)
+
+```bash
+docker pull rewoly/diamond-shield-lite-frontend:latest
+```
+Список версий:
+```text
+https://hub.docker.com/r/rewoly/diamond-shield-lite-frontend/tags
+```
