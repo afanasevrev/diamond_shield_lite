@@ -7,8 +7,8 @@ interface Props {
 }
 
 export default function LoginPage({onSuccess}: Props) {
-    const [username, setUsername] = useState("admin");
-    const [password, setPassword] = useState("admin123");
+    const [username, setUsername] = useState("diamond");
+    const [password, setPassword] = useState("DiamondAdmin2026Secure");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
