@@ -195,12 +195,13 @@ Backend реализован без Lombok.
 
 ## Структура репозитория
 ```
-├── Dockerfile
-├── pom.xml
-└── src/
-├── Dockerfile
-├── nginx.conf
-├── package.json
-└── src/
-└── screenshots/
+├── backend/
+│   ├── Dockerfile
+│   ├── pom.xml
+│   └── src/
+└── frontend/
+    ├── Dockerfile
+    ├── nginx.conf
+    ├── package.json
+    └── src/
 ```
