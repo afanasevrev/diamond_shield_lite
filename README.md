@@ -192,3 +192,13 @@ Backend реализован без Lombok.
 - Docker Hub.
 
 ---
+
+## Структура репозитория
+├── Dockerfile
+├── pom.xml
+└── src/
+├── Dockerfile
+├── nginx.conf
+├── package.json
+└── src/
+└── screenshots/
