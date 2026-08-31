@@ -111,3 +111,7 @@
 ### Люди
 
 ![Люди](docs/screenshots/people.PNG)
+
+### Журнал событий
+
+![Журнал](docs/screenshots/history.PNG)
